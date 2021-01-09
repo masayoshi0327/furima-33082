@@ -5,7 +5,7 @@ FactoryBot.define do
     password              {Faker::Alphanumeric.alphanumeric(number: 6, min_alpha: 1, min_numeric: 1)}
     password_confirmation {password}
     gimei = Gimei.name
-    last_name             {gimei.last.kanij}
+    last_name             {gimei.last.kanji}
     first_name            {gimei.first.kanji}
     last_furigana         {gimei.last.katakana}
     first_furigana        {gimei.first.katakana}
