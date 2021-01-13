@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_days
 
   with_options presence: true do
+    validates :image
     validates :name, length: { maximum: 40 }
     validates :description, length: { maximum: 1000 }
     with_options numericality: { other_than: 0 } do
@@ -19,5 +20,6 @@ class Item < ApplicationRecord
       validates :delivery_days_id
     end
     validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+    validates :user
   end
 end
