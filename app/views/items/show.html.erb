@@ -19,7 +19,7 @@
         ¥ <%= @item.price %>
       </span>
       <span class="item-postage">
-        <%= DeliveryFee.find(@item.delivery_fee_id)[:name] %>
+        <%= @item.delivery_fee.name %>
       </span>
     </div>
     <% if user_signed_in? %>
@@ -42,23 +42,23 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= Category.find(@item.category_id)[:name] %></td>
+          <td class="detail-value"><%= @item.category.name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= Condition.find(@item.condition_id)[:name] %></td>
+          <td class="detail-value"><%= @item.condition.name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= DeliveryFee.find(@item.delivery_fee_id)[:name] %></td>
+          <td class="detail-value"><%= @item.delivery_fee.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= Sender.find(@item.sender_id)[:name] %></td>
+          <td class="detail-value"><%= @item.sender.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= DeliveryDays.find(@item.delivery_days_id)[:name] %></td>
+          <td class="detail-value"><%= @item.delivery_days.name %></td>
         </tr>
       </tbody>
     </table>
@@ -98,7 +98,7 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href=“#” class=‘another-item’><%= Category.find(@item.category_id)[:name] %>をもっと見る</a>
+  <a href=“#” class=‘another-item’><%= @item.category.name %>をもっと見る</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
