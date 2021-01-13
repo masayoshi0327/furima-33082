@@ -8,26 +8,6 @@ RSpec.describe Item, type: :model do
     context '出品成功' do
       it 'すべてのデータを正しく入力できていれば保存できる' do
       end
-      it '画像を1枚添付すれば保存できる' do
-      end
-      it 'nameを40文字以内で記入すれば保存できる' do
-      end
-      it 'descriptionを1000文字以内で記入すれば保存できる' do
-      end
-      it 'category_idが0以外で存在すれば保存できる' do
-      end
-      it 'condition_idが0以外で存在すれば保存できる' do
-      end
-      it 'delivery_fee_idが0以外で存在すれば保存できる' do
-      end
-      it 'sender_idが0以外で存在すれば保存できる' do
-      end
-      it 'delivery_days_idが0以外で存在すれば保存できる' do
-      end
-      it 'priceが300..9999999の間で存在すれば保存できる' do
-      end
-      it 'userが紐づいていれば保存できる' do
-      end
     end
     context '出品失敗' do
       it '画像が添付されていなければ保存できない' do
