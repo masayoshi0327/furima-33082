@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_signed_in, only: [:new, :create, :edit, :update, :destroy]
+  before_action :move_to_signed_in, except: [:index, :show]
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
