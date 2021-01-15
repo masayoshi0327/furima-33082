@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :move_to_signed_in, only: [:new, :create, :edit, :update]
-  before_action :item_find, only: [:show, :edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :move_to_signed_in, except: [:index, :show]
+  before_action :item_find, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def index
     @items = Item.includes(:user).order('created_at DESC')
   end
@@ -33,6 +34,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
+
   private
 
   def move_to_signed_in
@@ -49,8 +58,6 @@ class ItemsController < ApplicationController
   end
 
   def correct_user
-    unless current_user.id == @item.user.id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user.id == @item.user.id
   end
 end
