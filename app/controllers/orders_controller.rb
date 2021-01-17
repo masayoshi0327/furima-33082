@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def move_to_signed_in
     redirect_to new_user_session_path unless user_signed_in?
   end
@@ -48,8 +49,6 @@ class OrdersController < ApplicationController
   end
 
   def sold_out?
-    unless @item.order.blank?
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.order.blank?
   end
 end
