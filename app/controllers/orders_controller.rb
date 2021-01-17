@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
+  before_action :move_to_signed_in, only: [:index, :create]
   before_action :item_find, only: [:index, :create]
+  before_action :correct_user, only: [:index, :create]
+  before_action :sold_out?, only: [:index]
 
   def index
     @order = Order.new
@@ -17,9 +20,16 @@ class OrdersController < ApplicationController
   end
 
   private
+  def move_to_signed_in
+    redirect_to new_user_session_path unless user_signed_in?
+  end
 
   def item_find
     @item = Item.find(params[:item_id])
+  end
+
+  def correct_user
+    redirect_to root_path unless current_user.id == @item.user.id
   end
 
   def order_params
@@ -35,5 +45,11 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def sold_out?
+    unless @item.order.blank?
+      redirect_to root_path
+    end
   end
 end
