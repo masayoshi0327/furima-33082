@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :move_to_signed_in, only: [:index, :create]
   before_action :item_find, only: [:index, :create]
-  before_action :same_user?, only: [:index, :create]
   before_action :sold_out?, only: [:index]
+  before_action :move_to_signed_in, only: [:index, :create]
+  before_action :same_user?, only: [:index, :create]
+  
 
   def index
     @order = Order.new
@@ -20,13 +21,16 @@ class OrdersController < ApplicationController
   end
 
   private
+  def item_find
+    @item = Item.find(params[:item_id])
+  end
+
+  def sold_out?
+    redirect_to root_path unless @item.order.blank?
+  end
 
   def move_to_signed_in
     redirect_to new_user_session_path unless user_signed_in?
-  end
-
-  def item_find
-    @item = Item.find(params[:item_id])
   end
 
   def same_user?
@@ -46,9 +50,5 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
-  end
-
-  def sold_out?
-    redirect_to root_path unless @item.order.blank?
   end
 end
