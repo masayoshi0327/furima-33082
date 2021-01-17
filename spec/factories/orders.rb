@@ -11,6 +11,7 @@ FactoryBot.define do
     house_number  {Faker::Lorem.word}
     building      {Faker::Lorem.word}
     phone         {Faker::Number.leading_zero_number(digits: 11)}
-    association :user, :item
+    association :item
+    user { item.user }
   end
 end
