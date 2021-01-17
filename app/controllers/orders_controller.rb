@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :move_to_signed_in, only: [:index, :create]
   before_action :item_find, only: [:index, :create]
-  before_action :correct_user, only: [:index, :create]
+  before_action :same_user?, only: [:index, :create]
   before_action :sold_out?, only: [:index]
 
   def index
@@ -29,8 +29,8 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def correct_user
-    redirect_to root_path unless current_user.id == @item.user.id
+  def same_user?
+    redirect_to root_path if current_user.id == @item.user.id
   end
 
   def order_params
