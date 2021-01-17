@@ -9,7 +9,7 @@ class Order < ApplicationRecord
     validates :prefecture_id, numericality: { other_than: 0 }
     validates :city
     validates :house_number
-    validates :phone, format: { with: /\A\d{11}\z/ }
+    validates :phone, format: { with: /\A\d{1,11}\z/ }
     validates :user
     validates :item
   end
